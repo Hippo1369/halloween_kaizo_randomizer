@@ -1695,6 +1695,7 @@ public abstract class AbstractRomHandler implements RomHandler {
                         .collect(Collectors.toList());
 
         List<Pokemon> banned = this.getBannedFormesForTrainerPokemon();
+        banned.addAll(this.bannedForWildEncounters());
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
@@ -4001,7 +4002,7 @@ public abstract class AbstractRomHandler implements RomHandler {
 
         int starterCount = starterCount();
         pickedStarters = new ArrayList<>();
-        List<Pokemon> banned = getBannedFormesForPlayerPokemon();
+        List<Pokemon> banned = this.bannedForWildEncounters();
         if (abilitiesUnchanged) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
@@ -4068,7 +4069,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         checkPokemonRestrictions();
         List<StaticEncounter> currentStaticPokemon = this.getStaticPokemon();
         List<StaticEncounter> replacements = new ArrayList<>();
-        List<Pokemon> banned = this.bannedForStaticPokemon();
+        List<Pokemon> banned = this.bannedForWildEncounters();
         banned.addAll(this.getBannedFormesForPlayerPokemon());
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
@@ -7127,7 +7128,7 @@ public abstract class AbstractRomHandler implements RomHandler {
         checkPokemonRestrictions();
         List<TotemPokemon> currentTotemPokemon = this.getTotemPokemon();
         List<TotemPokemon> replacements = new ArrayList<>();
-        List<Pokemon> banned = this.bannedForStaticPokemon();
+        List<Pokemon> banned = this.bannedForWildEncounters();
         if (!abilitiesAreRandomized) {
             List<Pokemon> abilityDependentFormes = getAbilityDependentFormes();
             banned.addAll(abilityDependentFormes);
